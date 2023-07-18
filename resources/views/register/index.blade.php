@@ -11,7 +11,8 @@
             </div>
             <div class="card-body">
                 <p class="font-weight-light fs-3">Sign Up</p>
-                <form class="form-group mx-4">
+                <form class="form-group mx-4" action="/register" method="post">
+                    @csrf
                     <input type="text" class="form-control mb-3" placeholder="Name" name="name">
                     <input type="text" class="form-control mb-3" placeholder="Username" name="username">
                     <input type="email" class="form-control mb-3" placeholder="Email Address" name="email">

@@ -13,4 +13,8 @@ class DaftarController extends Controller
             'active' => 'daftar',
         ]);
     }
+    public function store(Request $request)
+    {
+        return request()->all();
+    }
 }
