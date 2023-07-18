@@ -19,6 +19,11 @@
                     <a class="nav-link {{ $active === 'categories' ? 'active' : '' }}" href="/categories">CATEGORIES</a>
                 </li>
             </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="/login" class="nav-link"><i class="fas fa-sign-in-alt pe-1P"></i>Login</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
