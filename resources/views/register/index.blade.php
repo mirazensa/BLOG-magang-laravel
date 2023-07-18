@@ -13,11 +13,38 @@
                 <p class="font-weight-light fs-3">Sign Up</p>
                 <form class="form-group mx-4" action="/register" method="post">
                     @csrf
-                    <input type="text" class="form-control mb-3" placeholder="Name" name="name">
-                    <input type="text" class="form-control mb-3" placeholder="Username" name="username">
-                    <input type="email" class="form-control mb-3" placeholder="Email Address" name="email">
-                    <input type="password" class="form-control mb-3" placeholder="Password" name="password">
-                    <button type="submit" class="btn btn-dark btn-block w-100">Sign Up</button>
+                    <div class="mb-3">
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Name" name="name" required>
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control @error('username') is-invalid @enderror" placeholder="Username" name="username" required>
+                        @error('username')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email Address" name="email" required>
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" required>
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-dark btn-block w-100">Sign Up</button>
+                    </div>
+
                 </form>
                 <p class="text-center mt-3">sudah punya akun?<a href="/login" class="ps-2 text-decoration-none">Sign In!</a></p>
             </div>

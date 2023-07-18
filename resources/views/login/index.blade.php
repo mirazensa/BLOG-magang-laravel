@@ -4,6 +4,12 @@
 @extends('layouts.main')
 
 @section('container')
+    @if (session()->has('sukses'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('sukses') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="container d-flex justify-content-center mt-3">
         <div class="card" style="width: 25rem;">
             <div class="card-header p-0">
