@@ -34,12 +34,12 @@
                         <tbody>
                             @foreach ($posts as $post)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->category->name }}</td>
                                     <td class="text-center">
                                         <a href="/dashboard/blog/{{ $post->slug }}" class="btn btn-xs btn-info"><i class="fas fa-eye"></i></a>
-                                        <a href="#" class="btn btn-xs btn-warning"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="btn btn-xs btn-success mx-1"><i class="fas fa-edit"></i></a>
                                         <a href="#" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>

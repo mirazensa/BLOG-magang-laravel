@@ -19,8 +19,8 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-header">PORTFOLIO</li>
-                <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
-                    <a href="/dashboard" class="nav-link">
+                <li class="nav-item">
+                    <a href="/dashboard" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
                         <i class="fas fa-tachometer-alt pr-1"></i>
                         <p>Dashboard</p>
                     </a>
@@ -61,14 +61,14 @@
                     </ul>
                 </li>
                 <li class="nav-header">BLOG</li>
-                <li class="nav-item{{ Request::is('dashboard/blog') ? 'active' : '' }}">
-                    <a href="/dashboard/blog" class="nav-link">
+                <li class="nav-item">
+                    <a href="/dashboard/blog" class="nav-link {{ Request::is('dashboard/blog') ? 'active' : '' }}">
                         <i class="fas fa-blog pr-2"></i>
                         <p>Blog</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="/dashboard/blog/create" class="nav-link {{ Request::is('dashboard/blog/*') ? 'active' : '' }}">
                         <i class="fas fa-plus pr-2"></i>
                         <p>Tambah Postingan</p>
                     </a>

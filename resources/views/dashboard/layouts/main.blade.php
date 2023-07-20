@@ -13,11 +13,18 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('dashboard-assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dashboard-assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dashboard-assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dashboard-assets/dist/css/adminlte.css') }}" />
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('dashboard-assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}" />
+    <!-- Trix -->
+    <link rel="stylesheet" href="{{ asset('css/trix-2.0.0.css') }}" />
+    <script src="{{ asset('js/trix-2.0.0.min.js') }}"></script>
+    <style>
+        trix-toolbar[data-trix-button-group="file-tools"] {
+            display: none;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -56,15 +63,7 @@
     <script src="{{ asset('dashboard-assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('dashboard-assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('dashboard-assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-    {{-- <script src="{{ asset('dashboard-assets/plugins/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/pdfmake/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script> --}}
     <!-- Sparkline -->
     <script src="{{ asset('dashboard-assets/plugins/sparklines/sparkline.js') }}"></script>
     <!-- Summernote -->
@@ -75,12 +74,7 @@
     <script src="{{ asset('dashboard-assets/dist/js/adminlte.js') }}"></script>
     <script>
         $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": false
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $("#example1").DataTable();
         });
     </script>
 </body>
