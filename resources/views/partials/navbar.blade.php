@@ -7,22 +7,44 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav fw-medium">
                 <li class="nav-item pe-2">
-                    <a class="nav-link {{ $active === 'home' ? 'active' : '' }}" aria-current="page" href="/">HOME</a>
+                    <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="/">HOME</a>
                 </li>
                 <li class="nav-item pe-2">
-                    <a class="nav-link {{ $active === 'about' ? 'active' : '' }}" href="/about">ABOUT</a>
+                    <a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="/about">ABOUT</a>
                 </li>
                 <li class="nav-item pe-2">
-                    <a class="nav-link {{ $active === 'blog' ? 'active' : '' }}" href="/blog">BLOG</a>
+                    <a class="nav-link {{ Request::is('blog') ? 'active' : '' }}" href="/blog">BLOG</a>
                 </li>
                 <li class="nav-item pe-2">
-                    <a class="nav-link {{ $active === 'categories' ? 'active' : '' }}" href="/categories">CATEGORIES</a>
+                    <a class="nav-link {{ Request::is('categories') ? 'active' : '' }}" href="/categories">CATEGORIES</a>
                 </li>
             </ul>
+
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a href="/login" class="nav-link"><i class="fas fa-sign-in-alt pe-1P"></i>Login</a>
-                </li>
+
+                @auth
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Welcome Back,{{ auth()->user()->name }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/dashboard"><i class="fas fa-tachometer-alt me-1"></i>My Dashboard</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form action="/logout" method="post">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt me-1"></i>Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a href="/login" class="nav-link"><i class="fas fa-sign-in-alt pe-1P me-1"></i>Login</a>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>

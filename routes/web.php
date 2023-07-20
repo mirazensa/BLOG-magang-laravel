@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DaftarController;
+use App\Http\Controllers\DashboardPostController;
 use App\Models\Category;
 
 /*
@@ -21,14 +22,12 @@ use App\Models\Category;
 Route::get('/', function () {
     return view('home', [
         'title' => 'Home',
-        'active' => 'home',
     ]);
-});
+})->name('login');
 
 Route::get('/about', function () {
     return view('about', [
         'title' => 'About',
-        'active' => 'about',
         'name' => 'Ainul Kurniawan',
         'email' => 'mochainulkurniawan@gmail.com',
         'gambar' => 'iwan.jpg',
@@ -40,32 +39,22 @@ Route::get('/blog', [PostController::class, 'index']);
 //route model binding
 Route::get('/blog/{post:slug}', [PostController::class, 'show']);
 
-// Route::get('/categories/{category:slug}', function (Category $category) {
-//     return view('posts', [
-//         'title' => "Post by Category: $category->name",
-//         'active' => 'categories',
-//         'posts' => $category->posts->load('category', 'author'),
-//     ]);
-// });
-
 Route::get('/categories', function () {
     return view('categories', [
         'title' => 'Post Categories',
-        'active' => 'categories',
         'categories' => Category::all(),
     ]);
 });
 
-// Route::get('/authors/{author:username}', function (User $author) {
-//     return view('posts', [
-//         'title' => "Post by Author: $author->name",
-//         'active' => 'authors',
-//         'posts' => $author->posts->load('category', 'author'),
-//     ]);
-// });
-
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'autentikasi']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/register', [DaftarController::class, 'index']);
+Route::get('/register', [DaftarController::class, 'index'])->middleware('guest');
 Route::post('/register', [DaftarController::class, 'store']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+})->middleware('auth');
+
+Route::resource('/dashboard/blog', DashboardPostController::class)->middleware('auth');

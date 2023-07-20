@@ -39,4 +39,9 @@ class PostController extends Controller
             'post' => $post,
         ]);
     }
+
+    // public function getRouteKeyName()
+    // {
+    //     return 'slug';
+    // }
 }
