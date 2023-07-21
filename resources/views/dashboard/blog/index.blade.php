@@ -44,8 +44,12 @@
                                     <td>{{ $post->category->name }}</td>
                                     <td class="text-center">
                                         <a href="/dashboard/blog/{{ $post->slug }}" class="btn btn-xs btn-info"><i class="fas fa-eye"></i></a>
-                                        <a href="#" class="btn btn-xs btn-success mx-1"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                        <a href="/dashboard/blog/{{ $post->slug }}/edit" class="btn btn-xs btn-success mx-1"><i class="fas fa-edit"></i></a>
+                                        <form action="/dashboard/blog/{{ $post->slug }}" method="post" class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-xs btn-danger" onclick="return confirm('Yakin mau hapus kids?')"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

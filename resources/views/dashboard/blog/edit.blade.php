@@ -16,12 +16,13 @@
         <!-- Main content -->
         <section class="content">
             <div class="col-md-8">
-                <form method="post" action="/dashboard/blog" enctype="multipart/form-data">
+                <form method="post" action="/dashboard/blog/{{ $post->slug }}" enctype="multipart/form-data">
+                    @method('put')
                     @csrf
                     <div class="mb-2">
                         <div class="form-group">
                             <label for="title">Judul</label>
-                            <input type="text" name="title" class="form-control  @error('title') is-invalid @enderror" id="title" required autofocus>
+                            <input type="text" name="title" class="form-control  @error('title') is-invalid @enderror" id="title" value="{{ old('title', $post->title) }}" required autofocus>
                             @error('title')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -31,7 +32,7 @@
                     <div class="mb-2">
                         <div class="form-group">
                             <label for="slug">Slug</label>
-                            <input type="text" name="slug" class="form-control  @error('slug') is-invalid @enderror" id="slug">
+                            <input type="text" name="slug" class="form-control  @error('slug') is-invalid @enderror" id="slug" value="{{ old('slug', $post->slug) }}">
                             @error('slug')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -39,15 +40,25 @@
                     </div>
                     <div class="mb-2">
                         <div class="form-group">
-                            <label for="category">Kategori</label>
+                            <label for="category">Kategory</label>
                             <select class="custom-select" id="category_id" name="category_id">
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @if (old('category_id', $post->category_id) == $category->id)
+                                        <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                    @else
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    <img class="img-preview img-fluid mb-3 col-sm-5">
+
+                    <input type="hidden" name="oldImage" value="{{ $post->image }}">
+                    @if ($post->image)
+                        <img src="{{ asset('storage/' . $post->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                    @else
+                        <img class="img-preview img-fluid mb-3 col-sm-5">
+                    @endif
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Upload</span>
@@ -68,11 +79,11 @@
                                     {{ $message }}
                                 </p>
                             @enderror
-                            <input id="body" type="hidden" name="body">
+                            <input id="body" type="hidden" name="body" value="{{ old('body', $post->body) }}">
                             <trix-editor input="body"></trix-editor>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Tambahkan Postingan</button>
+                    <button type="submit" class="btn btn-primary">Edit Postingan</button>
                 </form>
             </div>
 
@@ -82,8 +93,7 @@
         const title = document.querySelector('#title');
         const slug = document.querySelector('#slug');
 
-        //change/keyup
-        title.addEventListener('change', function() {
+        title.addEventListener('keyup', function() {
             fetch('/dashboard/blog/checkSlug?title=' + title.value)
                 .then(response => response.json())
                 .then(data => slug.value = data.slug)
