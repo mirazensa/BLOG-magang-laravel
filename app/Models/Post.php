@@ -12,6 +12,7 @@ class Post extends Model
     use Sluggable;
 
     protected $guarded = ['id'];
+
     protected $with = ['author', 'category'];
 
     public function scopeFilter($query, array $filters)

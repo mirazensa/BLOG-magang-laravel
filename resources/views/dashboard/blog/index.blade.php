@@ -16,6 +16,11 @@
 
         <!-- Main content -->
         <section class="content">
+            @if (session()->has('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Table Blog</h3>

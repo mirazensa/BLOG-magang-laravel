@@ -16,31 +16,50 @@
         <!-- Main content -->
         <section class="content">
             <div class="col-md-8">
-                <form method="POST" action="/dashboard/blog">
+                <form method="post" action="/dashboard/blog">
                     @csrf
-                    <div class="form-group">
-                        <label for="title">Judul</label>
-                        <input type="text" name="title" class="form-control" id="title" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="slug">Slug</label>
-                        <input type="text" name="slug" class="form-control" id="slug" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="slug">Kategori</label>
-                        <select class="custom-select" id="category_id">
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="body">Body</label>
-                        <input id="body" type="hidden" name="body">
-                        <trix-editor input="body"></trix-editor>
-                    </div>
+                    <div class="mb-2">
+                        <div class="form-group">
+                            <label for="title">Judul</label>
+                            <input type="text" name="title" class="form-control  @error('title') is-invalid @enderror" id="title" required autofocus>
+                            @error('title')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
+                    </div>
+                    <div class="mb-2">
+                        <div class="form-group">
+                            <label for="slug">Slug</label>
+                            <input type="text" name="slug" class="form-control  @error('slug') is-invalid @enderror" id="slug">
+                            @error('slug')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <div class="form-group">
+                            <label for="category">Kategori</label>
+                            <select class="custom-select" id="category_id" name="category_id">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-2">
 
+                        <div class="form-group">
+                            <label for="body">Body</label>
+                            @error('body')
+                                <p class="text-danger">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                            <input id="body" type="hidden" name="body">
+                            <trix-editor input="body"></trix-editor>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary">Tambahkan Postingan</button>
                 </form>
             </div>
