@@ -19,9 +19,6 @@
         </div>
     </div>
 
-
-
-
     @if ($posts->count())
         <div class="card mb-3 text-center">
             @if ($posts[0]->image)
@@ -41,7 +38,6 @@
                 <a href="/blog/{{ $posts[0]->slug }}" class="btn btn-primary text-decoration-none">Read More...</a>
             </div>
         </div>
-
 
         <div class="container">
             <div class="row">
