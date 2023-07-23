@@ -21,8 +21,11 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    return view('home', [
+    return view('about', [
         'title' => 'Home',
+        'name' => 'Ainul Kurniawan',
+        'email' => 'mochainulkurniawan@gmail.com',
+        'gambar' => 'iwan.jpg',
     ]);
 })->name('login');
 

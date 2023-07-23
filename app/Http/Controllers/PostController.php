@@ -11,6 +11,7 @@ class PostController extends Controller
 {
     public function index()
     {
+        // @dd(Post::select('name')->get());
         $title = '';
         if (request('category')) {
             $category = Category::firstWhere('slug', request('category'));
@@ -23,7 +24,6 @@ class PostController extends Controller
 
         return view('posts', [
             'title' => 'All Posts' . $title,
-            'active' => 'blog',
             'categories' => Category::all(),
             // 'posts' => Post::all(),
             'posts' => Post::latest()
@@ -37,8 +37,8 @@ class PostController extends Controller
     {
         return view('post', [
             'title' => 'single Post',
-            'active' => 'blog',
             'post' => $post,
+            'categories' => Category::all(),
         ]);
     }
 

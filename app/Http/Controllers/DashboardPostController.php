@@ -101,7 +101,7 @@ class DashboardPostController extends Controller
         }
 
         $validatedData['user_id'] = auth()->user()->id;
-        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 100, '...');
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 97, '...');
 
         Post::where('id', $blog->id)->update($validatedData);
         return redirect('/dashboard/blog')->with('success', 'postingan berhasil ditambahkan');
